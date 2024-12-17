@@ -1,0 +1,130 @@
+/* General reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; 
+    font-family: "Doggy Paws", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background animation container */
+#background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Paws animation */
+.paw {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.6;
+    animation: move-paw linear infinite;
+    transform-origin: center;
+}
+
+@keyframes move-paw {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) rotate(360deg);
+    }
+}
+
+/* App container */
+#app-container {
+    width: 500px;
+    text-align: center;
+    background-color: rgba(216, 173, 123, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #4A4A4A;
+    margin: 0;
+}
+
+/* Dog frame */
+#dog-frame {
+    margin: 20px auto;
+    width: 400px;
+    height: 400px;
+    position: relative;
+    border: 8px solid #2c2c2c;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+#dog-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Button */
+#button-container {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 18px;
+    background-color: #FF4500;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* font-family: "Unkempt", cursive;
+    font-weight: 600;
+    font-style: normal;      */
+}
+
+button:hover {
+    background-color: #FF6347;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #dog-frame {
+        width: 250px;
+        height: 250px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 8px 20px;
+    }
+}
