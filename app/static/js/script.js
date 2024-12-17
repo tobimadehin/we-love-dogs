@@ -1,7 +1,8 @@
-// JavaScript for adding random backdrop prints to the background
 const backgroundContainer = document.getElementById("background-container");
+const fetchDogButton = document.getElementById("fetch-dog");
+const dogImage = document.getElementById("dog-image");
 
-function createPaw() {
+function createBackdrop() {
   const backdropImg = document.createElement("div");
   backdropImg.classList.add("paw");
 
@@ -21,14 +22,12 @@ function createPaw() {
   backdropImg.style.setProperty("--y", `${directionY}px`);
   backdropImg.style.animationDuration = `${duration}s`;
 
-  // Add a random backdrop image
-  // Update the backdropImages array with correct paths
   const backdropImages = [
-    "/client/static/img/dog.png",
-    "/client/static/img/bone.png",
-    "/client/static/img/dog-food.png",
-    "/client/static/img/dog1.png",
-    "/client/static/img/dog2.png",
+    "/static/img/dog.png",
+    "/static/img/bone.png",
+    "/static/img/dog-food.png",
+    "/static/img/dog1.png",
+    "/static/img/dog2.png",
   ];
 
   backdropImg.style.backgroundImage = `url(${
@@ -37,8 +36,17 @@ function createPaw() {
   backdropImg.style.backgroundSize = "cover";
   backgroundContainer.appendChild(backdropImg);
 
-  // Remove paw after animation
   setTimeout(() => backdropImg.remove(), duration * 1000);
 }
-// Add random paws at intervals
-setInterval(createPaw, 1000);
+
+setInterval(createBackdrop, 1000);
+
+async function fetchDog() {
+  const response = await fetch("/api/dog");
+  const data = await response.json();
+  dogImage.src = data.image;
+}
+
+fetchDog();
+
+fetchDogButton.addEventListener("click", fetchDog);
