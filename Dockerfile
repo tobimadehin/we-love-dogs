@@ -1,29 +1,16 @@
-# Use official Golang image to build the Go server
-FROM golang:1.19 AS builder
+FROM golang:1.23-alpine
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Go files into the container
-COPY . .
+COPY go.mod ./
 
-# Download the Go dependencies
-RUN go mod tidy
+RUN go mod download
 
-# Build the Go application
-RUN go build -o dog-api .
+COPY app/ .
 
-# Use a minimal base image to run the Go application
-FROM debian:bullseye-slim
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 
-# Set the working directory inside the container
-WORKDIR /root/
+# Provide the port if defined in .env file
+ENV PORT=8080
 
-# Copy the built binary from the builder image
-COPY --from=builder /app/dog-api .
-
-# Expose the port the app will run on
-EXPOSE 8080
-
-# Command to run the Go application
-CMD ["./dog-api"]
+CMD ["/docker-gs-ping"]
