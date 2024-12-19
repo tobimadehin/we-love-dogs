@@ -16,6 +16,11 @@ echo "Installing Loki stack..."
 
 echo "Waiting for Grafana pod to be ready..."
 kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=grafana --timeout=3600s
-
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=prometheus --timeout=3600s
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=prometheus-node-exporter --timeout=3600s
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=kube-state-metrics --timeout=3600s
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=kube-operator --timeout=3600s
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=alertmanager --timeout=3600s
 echo "Setting up port forwarding for Grafana..."
+
 kubectl port-forward deployment/prometheus-community-grafana 3000
