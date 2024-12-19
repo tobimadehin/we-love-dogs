@@ -2,7 +2,7 @@ FROM golang:1.23-alpine
 
 WORKDIR /app
 
-COPY go.mod ./
+COPY go.mod go.sum ./
 
 RUN go mod download
 
@@ -10,7 +10,6 @@ COPY app/ .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 
-# Provide the port if defined in .env file
-ENV PORT=8080
+EXPOSE 9900
 
 CMD ["/docker-gs-ping"]

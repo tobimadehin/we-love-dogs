@@ -18,4 +18,4 @@ spec:
         - name: app
           image: k3d-my-app-registry:5050/we-love-dogs:v0.1
           ports:
-            - containerPort: 8080
+            - containerPort: 9900
